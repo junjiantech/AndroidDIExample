@@ -1,6 +1,10 @@
 import top.j3dream.buildsrc.BuildConfig
 import top.j3dream.buildsrc.Dependencies
+import top.j3dream.buildsrc.Plugins
 apply from: fetchBuildScriptAbsolutePath("buildscript_application.gradle")
+
+// use kapt plugin
+apply plugin: Plugins.kotlinKapt
 
 android {
 
@@ -18,4 +22,12 @@ dependencies {
 
     implementation Dependencies.Google.Material
     implementation Dependencies.AndroidX.ConstraintLayout
+
+    // example use dagger2 version 2.38.1
+    def version_dagger2 = "2.38.1"
+    // dagger2 Android support dependencies & compiler
+    implementation "com.google.dagger:dagger:${version_dagger2}"
+    implementation "com.google.dagger:dagger-android:${version_dagger2}"
+    kapt "com.google.dagger:dagger-compiler:${version_dagger2}"
+    kapt "com.google.dagger:dagger-android-processor:${version_dagger2}"
 }

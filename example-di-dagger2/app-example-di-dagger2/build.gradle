@@ -25,9 +25,10 @@ dependencies {
 
     // example use dagger2 version 2.38.1
     def version_dagger2 = "2.38.1"
-    // dagger2 Android support dependencies & compiler
+    // dagger2 dependencies & compiler
     implementation "com.google.dagger:dagger:${version_dagger2}"
-    implementation "com.google.dagger:dagger-android:${version_dagger2}"
     kapt "com.google.dagger:dagger-compiler:${version_dagger2}"
-    kapt "com.google.dagger:dagger-android-processor:${version_dagger2}"
+
+//    implementation "com.google.dagger:dagger-android:${version_dagger2}"
+//    kapt "com.google.dagger:dagger-android-processor:${version_dagger2}"
 }

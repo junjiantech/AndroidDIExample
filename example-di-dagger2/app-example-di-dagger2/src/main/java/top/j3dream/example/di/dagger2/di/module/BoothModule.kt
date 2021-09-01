@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import top.j3dream.example.di.dagger2.di.testmodel.Car
 import top.j3dream.example.di.dagger2.di.testmodel.CarBooth
+import top.j3dream.example.di.dagger2.di.testmodel.ICarShow
 
 /**
  * @author Jia Junjian
@@ -18,5 +19,5 @@ class BoothModule {
      * @return 该传入 car 的站台
      */
     @Provides
-    fun provideCarBooth(car: Car): CarBooth = CarBooth(car)
+    fun provideCarBooth(car: Car, show: ICarShow): CarBooth = CarBooth(car, show)
 }

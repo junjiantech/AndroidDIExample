@@ -12,5 +12,5 @@ class Driver @Inject constructor() {
     /**
      * 驾驶员的名称
      */
-    fun getDriverName() = "小贾"
+    fun getDriverName() = "小贾${(0..9).random()}"
 }

@@ -4,6 +4,7 @@ import dagger.Component
 import top.j3dream.example.di.dagger2.di.module.BoothModule
 import top.j3dream.example.di.dagger2.di.module.EngineModule
 import top.j3dream.example.di.dagger2.di.module.MainModule
+import top.j3dream.example.di.dagger2.di.scope.PreMainActivity
 
 /**
  * Main Activity DI Component
@@ -13,9 +14,10 @@ import top.j3dream.example.di.dagger2.di.module.MainModule
  * 依赖需求方和依赖提供方之间的桥梁，需要调用该接口生成类的 inject 方法才能完成注入.
  * 被Component标注的接口在编译时会生成该接口的实现类，如当前类将会生成 DaggerMainComponent.
  */
+@PreMainActivity
 @Component(
     modules = [MainModule::class, EngineModule::class],
-    dependencies = [TrafficPoliceComponent::class]
+    dependencies = [TrafficPoliceComponent::class, CarShowComponent::class]
 )
 interface MainComponent {
 

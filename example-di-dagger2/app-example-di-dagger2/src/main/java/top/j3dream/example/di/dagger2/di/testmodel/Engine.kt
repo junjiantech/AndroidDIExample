@@ -23,7 +23,7 @@ class TurbochargedEngine @Inject constructor() : Engine {
 }
 
 // 自然吸气发动机
-class NaturallyAspiratedEngine : Engine {
+class NaturallyAspiratedEngine @Inject constructor() : Engine {
 
     override fun engineName(): String = "自然吸气发动机"
 }

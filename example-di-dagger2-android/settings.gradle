@@ -6,5 +6,5 @@ dependencyResolutionManagement {
         jcenter() // Warning: this repository is going to shut down soon
     }
 }
-rootProject.name = "example-di-dagger2"
+rootProject.name = "example-di-dagger2-android"
 include ':app-example-di-dagger2'

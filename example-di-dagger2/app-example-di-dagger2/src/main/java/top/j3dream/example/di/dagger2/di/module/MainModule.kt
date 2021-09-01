@@ -22,9 +22,14 @@ class MainModule {
      * @param frame 车架/框架
      */
     @Provides
-    fun provideMainTestCar(engine: Engine, trafficPolice: TrafficPolice): Car {
+    fun provideMainTestCar(
+        engine: Engine,
+        trafficPolice: TrafficPolice,
+        tire: Car.Tire,
+        frame: Car.Frame
+    ): Car {
         // 生产一个 Car 对象提供给 MainActivity 使用
-        return object : Car(engine, trafficPolice.generatePlateNumber()) {
+        return object : Car(engine, trafficPolice.generatePlateNumber(), tire, frame) {
             override fun getBrand(): String = "KIA"
 
             override fun getModel(): String = "KX3"

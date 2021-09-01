@@ -1,9 +1,9 @@
 package top.j3dream.example.di.dagger2.di.component
 
 import dagger.Component
+import top.j3dream.example.di.dagger2.di.module.BoothModule
 import top.j3dream.example.di.dagger2.di.module.EngineModule
 import top.j3dream.example.di.dagger2.di.module.MainModule
-import top.j3dream.example.di.dagger2.feature.MainActivity
 
 /**
  * Main Activity DI Component
@@ -31,5 +31,11 @@ interface MainComponent {
      * 但在它们以参数形式接收要注入的对象时将其称为 inject() 是 Dagger 中的一种惯例</p>
      * @param mainActivity MainActivity
      */
-    fun inject(mainActivity: MainActivity)
+    //TODO 注意因为 BoothComponent 使用了 Subcomponent 模式注入 CarBooth 则需要将 'inject' 方法移动到 BoothComponent 中.
+    //fun inject(mainActivity: MainActivity)
+
+    /**
+     * 提供 BoothComponent
+     */
+    fun boothComponent(module: BoothModule): BoothComponent
 }

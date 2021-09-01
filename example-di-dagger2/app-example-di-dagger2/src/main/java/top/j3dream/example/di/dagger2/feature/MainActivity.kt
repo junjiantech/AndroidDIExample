@@ -1,12 +1,12 @@
 package top.j3dream.example.di.dagger2.feature
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import top.j3dream.example.di.dagger2.databinding.ActivityMainBinding
 import top.j3dream.example.di.dagger2.di.component.DaggerMainComponent
 import top.j3dream.example.di.dagger2.di.component.DaggerTrafficPoliceComponent
-import top.j3dream.example.di.dagger2.di.testmodel.Car
+import top.j3dream.example.di.dagger2.di.module.BoothModule
+import top.j3dream.example.di.dagger2.di.testmodel.CarBooth
 import top.j3dream.example.di.dagger2.di.testmodel.Driver
 import javax.inject.Inject
 
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mViewBinding: ActivityMainBinding
 
     @Inject
-    lateinit var mCar: Car
+    lateinit var mCarBooth: CarBooth
 
     @Inject
     lateinit var mDriver: Driver
@@ -44,26 +44,21 @@ class MainActivity : AppCompatActivity() {
         // 创建依赖的 Component
         val trafficPoliceComponent = DaggerTrafficPoliceComponent.create()
         // 通过建造者模式创建MainComponent
-        DaggerMainComponent.builder()
+        val daggerMainComponent = DaggerMainComponent.builder()
             .trafficPoliceComponent(trafficPoliceComponent)
-            .build().inject(this)
+            .build()
 
-        ///region
+        // 需要 SubComponent 中完成注入. 如果在 MainComponent 中 inject 则无法获取 'CarBooth'
+        daggerMainComponent.boothComponent(BoothModule()).inject(this)
+
+        ///endregion
 
         super.onCreate(savedInstanceState)
         // 绑定 ViewBinding.
         mViewBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mViewBinding.root)
-        // 打印程序信息.
-        Log.e(
-            TAG, String.format(
-                "Driver (%s) play CAR(%s): [%s(%s)] use %s engine",
-                mDriver.getDriverName(),
-                mCar.getPlateNumber(),
-                mCar.getBrand(),
-                mCar.getModel(),
-                mCar.getEngineName()
-            )
-        )
+
+        // 调用车辆展台的展示方法. 展示车辆
+        mCarBooth.booth(mDriver)
     }
 }

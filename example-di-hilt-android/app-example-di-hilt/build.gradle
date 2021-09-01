@@ -1,6 +1,9 @@
 import top.j3dream.buildsrc.BuildConfig
 import top.j3dream.buildsrc.Dependencies
+import top.j3dream.buildsrc.Plugins
 apply from: fetchBuildScriptAbsolutePath("buildscript_application.gradle")
+// use kapt
+apply plugin: Plugins.kotlinKapt
 
 android {
 
@@ -12,8 +15,17 @@ android {
     }
 }
 
+kapt {
+    // 允许引用生成的代码
+    correctErrorTypes true
+}
+
 dependencies {
 
     implementation Dependencies.AndroidX.ConstraintLayout
     implementation Dependencies.Google.Material
+
+    def hiltVersion = "2.38.1"
+    implementation "com.google.dagger:hilt-android:${hiltVersion}"
+    kapt "com.google.dagger:hilt-android-compiler:${hiltVersion}"
 }

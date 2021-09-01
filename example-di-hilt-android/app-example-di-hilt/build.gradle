@@ -1,0 +1,19 @@
+import top.j3dream.buildsrc.BuildConfig
+import top.j3dream.buildsrc.Dependencies
+apply from: fetchBuildScriptAbsolutePath("buildscript_application.gradle")
+
+android {
+
+    defaultConfig {
+        def moduleInfo = BuildConfig.APP_EXAMPLE
+        applicationId moduleInfo.appId
+        versionCode moduleInfo.versionCode
+        versionName moduleInfo.versionName
+    }
+}
+
+dependencies {
+
+    implementation Dependencies.AndroidX.ConstraintLayout
+    implementation Dependencies.Google.Material
+}

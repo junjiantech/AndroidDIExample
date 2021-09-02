@@ -10,6 +10,7 @@ import top.j3dream.example.di.hilt.di.testmodel.AppHelper
 import top.j3dream.example.di.hilt.di.testmodel.SystemPrinter
 import top.j3dream.example.di.hilt.di.testmodel.User
 import javax.inject.Inject
+import javax.inject.Provider
 
 /**
  * 应用主页(入口)活动
@@ -32,8 +33,11 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var mSystemPrinter: SystemPrinter
 
+    /**
+     * Provider 要求每次都实例化新的对象。 但是因为 AppHelper 注解了 @Singleton 则Provider失效
+     */
     @Inject
-    lateinit var mAppHelper: AppHelper
+    lateinit var mAppHelper: Provider<AppHelper>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,8 +56,8 @@ class MainActivity : AppCompatActivity() {
             mAppConfig.printAppConfigCode()
             // 通过注入的 SystemPrinter 打印 用户信息
             mSystemPrinter.printUserInfo(mUser)
-
-            mAppHelper.printAppHelperCode()
+            // 虽然使用了 Provider 但是因为在 Module中为提供的方法注释了Singleton, 所以每次 get() 依然会获取同一个对象.
+            mAppHelper.get().printAppHelperCode()
         }
     }
 }
